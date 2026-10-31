@@ -14,10 +14,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          # cache: npm
-          # cache-dependency-path: |
-          #   infra/package-lock.json
-          #   web/package-lock.json
+          cache: npm
+          cache-dependency-path: |
+            infra/package-lock.json
+            web/package-lock.json
       - name: Install web dependencies
         run: npm ci --prefix web
       - name: Install infrastructure dependencies
