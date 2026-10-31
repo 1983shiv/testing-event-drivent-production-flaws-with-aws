@@ -1,0 +1,28 @@
+name: Verify
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Build and regression tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            infra/package-lock.json
+            web/package-lock.json
+      - name: Install web dependencies
+        run: npm ci --prefix web
+      - name: Install infrastructure dependencies
+        run: npm ci --prefix infra
+      - name: Build web application
+        run: npm run build --prefix web
+      - name: Verify infrastructure and upload flow
+        run: npm run verify --prefix infra
