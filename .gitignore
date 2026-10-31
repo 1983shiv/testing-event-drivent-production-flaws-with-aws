@@ -1,0 +1,10 @@
+# Environment files can contain credentials and must stay local.
+**/.env*
+
+# Dependencies and generated build output.
+**/node_modules/
+**/.next/
+**/cdk.out/
+**/coverage/
+**/*.tsbuildinfo
+**/npm-debug.log*
